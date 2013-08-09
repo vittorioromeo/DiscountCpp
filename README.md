@@ -1,6 +1,8 @@
 #DiscountCpp
 
-C++11 wrapper for the markdown library "Discount"
+C++11 wrapper for the [C markdown library **Discount**](http://www.pell.portland.or.us/~orc/Code/discount/).
+
+Currently implements very few functions from Discount, but offers a very easy-to-use interface to quickly convert Markdown to HTML.
 
 ##Global functions (fire and forget)
 
