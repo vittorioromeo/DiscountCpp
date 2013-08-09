@@ -29,7 +29,7 @@ namespace discountcpp
 		{
 			size_t read = 0;
 			*mCString = NULL;
-ì
+
 			do
 			{
 				if(!mFilePtr) break;
