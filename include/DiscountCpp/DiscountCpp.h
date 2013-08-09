@@ -1,11 +1,8 @@
 #ifndef DISCOUNTCPP
 #define DISCOUNTCPP
 
-#include <iostream>
-#include <memory>
 #include <string>
 #include <stdexcept>
-#include <functional>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -32,9 +29,7 @@ namespace discountcpp
 		{
 			size_t read = 0;
 			*mCString = NULL;
-
-			if(mOutError) mOutError = 1;
-
+ì
 			do
 			{
 				if(!mFilePtr) break;
