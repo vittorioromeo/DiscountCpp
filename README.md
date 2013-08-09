@@ -36,3 +36,41 @@ std::string writeBlogHTML()
 	return resultPage;
 }
 ```
+
+##Objects
+
+```cpp
+namespace discountcpp
+{
+	class Source; // Markdown source 
+	class Document; // Markdown document
+}
+```
+
+`discountcpp::Source` can read Markdown code from strings or files.
+
+`discountcpp::Document` must be constructed with a `discountcpp::Source`, and can generate HTML strings or files.
+
+Example usage:
+```cpp
+std::string writeBlogHTML()
+{
+	std::string resultPage;
+
+	for(const auto& markdownEntryPath : getBlogMarkdownEntryPaths())	
+	{
+		discountcpp::Source source;
+		source.readFromFile(markdownEntryPath);
+
+		// Using the same document to output both to string and both to file
+		discountcpp::Document document{source};
+		string outputHTML;
+		document.writeHTMLToString(outputHTML);
+		document.writeHTMLToFile(markdownEntryPath + ".tmp.html");
+
+		resultPage += outputHTML;
+	}
+		
+	return resultPage;
+}
+```
