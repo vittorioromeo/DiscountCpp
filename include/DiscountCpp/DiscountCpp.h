@@ -45,7 +45,7 @@ namespace discountcpp
 
 				if(size != static_cast<long>(read)) throw std::runtime_error("[DiscountCpp internal error] Error reading file ptr contents");
 			}
-			while(true);
+			while(false);
 
 			return read;
 		}
