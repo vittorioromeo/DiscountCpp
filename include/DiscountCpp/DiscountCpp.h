@@ -29,23 +29,19 @@ namespace discountcpp
 			size_t read{0};
 			*mCString = nullptr;
 
-			do
-			{
-				if(!mFilePtr) break;
+			if(!mFilePtr) return read;
 
-				long size{getFilePtrSize(mFilePtr)};
-				if(size < 0) break;
+			long size{getFilePtrSize(mFilePtr)};
+			if(size < 0) return read;
 
-				*mCString = static_cast<char*>(malloc((size_t)size + 1));
-				if(!*mCString) break;
+			*mCString = static_cast<char*>(malloc((size_t)size + 1));
+			if(!*mCString) return read;
 
-				read = fread(*mCString, 1, (size_t)size, mFilePtr);
-				(*mCString)[read] = 0;
-				*mCString = static_cast<char*>(realloc(*mCString, read + 1));
+			read = fread(*mCString, 1, (size_t)size, mFilePtr);
+			(*mCString)[read] = 0;
+			*mCString = static_cast<char*>(realloc(*mCString, read + 1));
 
-				if(size != static_cast<long>(read)) throw std::runtime_error("[DiscountCpp internal error] Error reading file ptr contents");
-			}
-			while(false);
+			if(size != static_cast<long>(read)) throw std::runtime_error("[DiscountCpp internal error] Error reading file ptr contents");
 
 			return read;
 		}
@@ -54,8 +50,7 @@ namespace discountcpp
 		inline std::string readFile(const std::string& mPath)
 		{
 			std::ifstream ifs{mPath};
-			std::string result{std::istreambuf_iterator<char>(ifs), std::istreambuf_iterator<char>()};
-			ifs.close(); return result;
+			return {std::istreambuf_iterator<char>(ifs), std::istreambuf_iterator<char>()};
 		}
 	}
 
