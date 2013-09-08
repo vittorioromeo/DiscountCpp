@@ -24,9 +24,9 @@ namespace discountcpp
 			return size;
 		}
 
-		size_t filePtrContentsToCString(char** mCString, FILE* mFilePtr)
+		std::size_t filePtrContentsToCString(char** mCString, FILE* mFilePtr)
 		{
-			size_t read{0};
+			std::size_t read{0};
 			*mCString = nullptr;
 
 			if(!mFilePtr) return read;
@@ -34,10 +34,10 @@ namespace discountcpp
 			long size{getFilePtrSize(mFilePtr)};
 			if(size < 0) return read;
 
-			*mCString = static_cast<char*>(malloc((size_t)size + 1));
+			*mCString = static_cast<char*>(malloc((std::size_t)size + 1));
 			if(!*mCString) return read;
 
-			read = fread(*mCString, 1, (size_t)size, mFilePtr);
+			read = fread(*mCString, 1, (std::size_t)size, mFilePtr);
 			(*mCString)[read] = 0;
 			*mCString = static_cast<char*>(realloc(*mCString, read + 1));
 
