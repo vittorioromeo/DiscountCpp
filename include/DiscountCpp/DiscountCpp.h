@@ -80,7 +80,7 @@ namespace discountcpp
 			~Source() { if(mmiot != nullptr) mkd_cleanup(mmiot); }
 
 			inline static Source fromFile(const std::string& mPath)		{ Source result; result.readFromFile(mPath); return result; }
-			inline static Source fromString(const std::string& mString)	{ Source result; result.readFromString(mString); return result; }
+			inline static Source fromString(const std::string& mStr)	{ Source result; result.readFromString(mStr); return result; }
 
 			inline void readFromFile(const std::string& mPath)		{ source = Internal::readFile(mPath); refreshMMIOT(); }
 			inline void readFromString(const std::string& mSource)	{ source = mSource; refreshMMIOT(); }
@@ -101,11 +101,11 @@ namespace discountcpp
 				markdown(source.getMMIOT(), file, 0);
 				fclose(file);
 			}
-			void writeHTMLToString(std::string& mString)
+			void writeHTMLToString(std::string& mStr)
 			{
 				FILE* file{tmpfile()};
 				markdown(source.getMMIOT(), file, 0);
-				mString = Internal::getFilePtrContents(file);
+				mStr = Internal::getFilePtrContents(file);
 				fclose(file);
 			}
 	};
