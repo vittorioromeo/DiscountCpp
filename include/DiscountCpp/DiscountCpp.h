@@ -13,7 +13,7 @@ extern "C"
 }
 
 namespace discountcpp
-{
+{	
 	namespace Internal
 	{
 		long getFilePtrSize(FILE* mFilePtr)
