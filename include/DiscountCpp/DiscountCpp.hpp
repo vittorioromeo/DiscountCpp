@@ -13,7 +13,7 @@ extern "C"
 }
 
 namespace discountcpp
-{	
+{
 	namespace Internal
 	{
 		long getFilePtrSize(FILE* mFilePtr)
@@ -58,7 +58,7 @@ namespace discountcpp
 
 	class Source
 	{
-		friend class Document;
+		friend Document;
 
 		private:
 			std::string source;
