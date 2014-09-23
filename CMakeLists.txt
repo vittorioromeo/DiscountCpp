@@ -23,5 +23,4 @@ include_directories(${INC_MARKDOWN})
 
 add_library(HEADER_ONLY_TARGET STATIC ${SRC_LIST})
 set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
-
 install(DIRECTORY ${INC_DIR} DESTINATION .)
