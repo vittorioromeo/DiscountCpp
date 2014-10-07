@@ -46,7 +46,7 @@ namespace discountcpp
 			return read;
 		}
 
-		inline std::string getFilePtrContents(FILE* mFilePtr) { char* result; filePtrContentsToCString(&result, mFilePtr); return result; }
+		inline std::string getFilePtrContents(FILE* mFilePtr) { char* buf; filePtrContentsToCString(&buf, mFilePtr); std::string result{buf}; free(buf); return result; }
 		inline std::string readFile(const std::string& mPath)
 		{
 			std::ifstream ifs{mPath};
