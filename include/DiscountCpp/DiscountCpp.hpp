@@ -80,7 +80,7 @@ namespace discountcpp
 			~Source() { if(mmiot != nullptr) mkd_cleanup(mmiot); }
 
 			inline static Source fromFile(const std::string& mPath)		{ Source result; result.readFromFile(mPath); return result; }
-			inline static Source fromString(const std::string& mStr)	{ Source result; result.readFromString(mStr); return result; }
+			inline static Source fromStr(const std::string& mStr)	{ Source result; result.readFromString(mStr); return result; }
 
 			inline void readFromFile(const std::string& mPath)		{ source = Impl::readFile(mPath); refreshMMIOT(); }
 			inline void readFromString(const std::string& mSource)	{ source = mSource; refreshMMIOT(); }
@@ -116,7 +116,7 @@ namespace discountcpp
 		inline void writeToFile(const std::string& mPath, const std::string& mContents)	{ std::ofstream ofs{mPath}; ofs << mContents; ofs.flush(); ofs.close(); }
 	}
 
-	inline std::string getHTMLFromMarkdownString(const std::string& mMarkdownString)	{ return Impl::getHTMLFromMarkdownSource(Source::fromString(mMarkdownString)); }
+	inline std::string getHTMLFromMarkdownString(const std::string& mMarkdownString)	{ return Impl::getHTMLFromMarkdownSource(Source::fromStr(mMarkdownString)); }
 	inline std::string getHTMLFromMarkdownFile(const std::string& mMarkdownFilePath)	{ return Impl::getHTMLFromMarkdownSource(Source::fromFile(mMarkdownFilePath)); }
 	inline void writeHTMLFileFromMarkdownString(const std::string& mHTMLFilePath, const std::string& mMarkdownString)	{ Impl::writeToFile(mHTMLFilePath, getHTMLFromMarkdownString(mMarkdownString)); }
 	inline void writeHTMLFileFromMarkdownFile(const std::string& mHTMLFilePath, const std::string& mMarkdownFilePath)	{ Impl::writeToFile(mHTMLFilePath, getHTMLFromMarkdownFile(mMarkdownFilePath)); }
