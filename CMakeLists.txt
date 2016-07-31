@@ -1,26 +1,20 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
-set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type.")
-project(DiscountCpp)
+# Include `vrm_cmake`.
+list(APPEND CMAKE_MODULE_PATH
+    "${CMAKE_SOURCE_DIR}/../vrm_cmake/cmake/"
+    "${CMAKE_SOURCE_DIR}/extlibs/vrm_cmake/cmake/")
 
-set(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread" CACHE STRING "")
-set(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3" CACHE STRING "")
-set(CMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3 -gdwarf-2" CACHE STRING "")
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/;${CMAKE_MODULE_PATH}")
+include(vrm_cmake)
 
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og")
-else()
-	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
-endif()
+vrm_cmake_init_project(DiscountCpp)
+vrm_cmake_add_common_compiler_flags()
 
+find_library(LIB_MARKDOWN markdown)
 find_path(INC_MARKDOWN mkdio.h)
-
-set(SRC_DIR "src")
-set(INC_DIR "include")
-file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
 include_directories(${INC_MARKDOWN})
 
-add_library(HEADER_ONLY_TARGET STATIC ${SRC_LIST})
-set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
-install(DIRECTORY ${INC_DIR} DESTINATION .)
+set(DISCOUNTCPP_INC_DIR "${DISCOUNTCPP_SOURCE_DIR}/include/")
+include_directories(${DISCOUNTCPP_INC_DIR})
+
+vrm_cmake_header_only_install_glob("${DISCOUNTCPP_INC_DIR}" "include")
