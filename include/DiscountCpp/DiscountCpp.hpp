@@ -121,7 +121,10 @@ namespace discountcpp
             source = mSource;
             refreshMMIOT();
         }
-        inline const std::string& getSource() const { return source; }
+        inline const std::string& getSource() const
+        {
+            return source;
+        }
     };
 
     class Document
@@ -130,7 +133,9 @@ namespace discountcpp
         const Source& source;
 
     public:
-        Document(const Source& mSource) : source(mSource) {}
+        Document(const Source& mSource) : source(mSource)
+        {
+        }
 
         void writeHTMLToFile(const std::string& mPath)
         {
@@ -161,7 +166,6 @@ namespace discountcpp
             std::ofstream ofs{mPath};
             ofs << mContents;
             ofs.flush();
-            ofs.close();
         }
     }
 
